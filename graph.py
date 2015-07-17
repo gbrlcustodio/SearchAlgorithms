@@ -35,7 +35,21 @@ class Graph:
             selt.add_vertex(to)
 
         self.vertex_dict[frm].add_neighbor(self.vertex_dict[to], cost)
-        self.vertex_dict[to].add_neighbor(self.vertex_dict[frm], cost)
+
+    def add_heuristic(self, heuristic):
+        frm, to, h = heuristic
+
+        try:
+            h = int(h)
+        except ValueError:
+            print('The heuristic value isn\'t a numerical value')
+
+        if frm not in self.vertex_dict:
+            self.add_vertex(frm)
+        if to not in self.vertex_dict:
+            self.add_vertex(to)
+
+        self.vertex_dict[frm].add_heuristic(self.vertex_dict[to], h)
 
     def get_vertices(self):
         return self.vertex_dict.keys()
@@ -46,7 +60,11 @@ class Graph:
             for w in v.connections():
                 vid = v.get_id()
                 wid = w.get_id()
-                print('(%s, %s, %3d)'  % ( vid, wid, v.get_weight(w)))
+                print('(%s, %s, weight = %3d)' % (vid, wid, v.get_weight(w)))
+            for h in v.heuristics():
+                vid = v.get_id()
+                hid = h.get_id()
+                print('(%s, %s, heuris = %3d)' % (vid, hid, v.get_heuristic(h)))
 
     @property
     def previous(self):

@@ -4,8 +4,11 @@ class Vertex:
     def __init__(self, node):
         self.id = node
         self._adjacent = {}
+        self._heuristic = {}
         # Set distance to infinity to all nodes
         self._distance = sys.maxsize
+        # Mark all nodes unexplored
+        self._explored = False
         # Mark all nodes unvisited
         self._visited = False
         # Predecessor
@@ -22,6 +25,15 @@ class Vertex:
 
     def get_weight(self, neighbor):
         return self._adjacent[neighbor]
+
+    def add_heuristic(self, target, value):
+        self._heuristic[target] = value
+
+    def heuristics(self):
+        return self._heuristic.keys()
+
+    def get_heuristic(self, target):
+        return self._heuristic[target]
 
     @property
     def adjacent(self):
@@ -42,6 +54,14 @@ class Vertex:
     @visited.setter
     def visited(self, value):
         self._visited = value
+
+    @property
+    def explored(self):
+        return self._explored
+
+    @explored.setter
+    def explored(self, value):
+        self._explored = value
 
     @property
     def previous(self):

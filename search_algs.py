@@ -57,7 +57,7 @@ def main(argv):
     content = parser.read_content()
 
     graph = Graph()
-    build_graph(graph, content['vertices'], content['caminho'])
+    build_graph(graph, content['vertices'], content['caminho'], content['h'])
     graph.print_data()
 
     start = graph.get_vertex(content['inicio'][0][0])
@@ -65,23 +65,15 @@ def main(argv):
 
     Dijkstra(graph, start, final).run()
 
-    path = [final.get_id()]
-    shortest(final, path)
-    print('The shortest path : %s' % (path[::-1]))
-
-def shortest(v, path):
-    ''' make shortest path from v.previous'''
-    if v.previous:
-        path.append(v.previous.get_id())
-        shortest(v.previous, path)
-    return
-
-def build_graph(graph, vertices, edges):
+def build_graph(graph, vertices, edges, heuristics):
     for vertex in vertices:
         graph.add_vertex(vertex)
 
     for edge in edges:
         graph.add_edge(edge)
+
+    for heuristic in heuristics:
+        graph.add_heuristic(heuristic)
 
 if __name__ == '__main__':
     main(sys.argv[1:])

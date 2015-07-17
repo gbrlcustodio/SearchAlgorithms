@@ -5,6 +5,9 @@ class Vertex:
         self.id = node
         self._adjacent = {}
         self._heuristic = {}
+        self.initialize()
+
+    def initialize(self):
         # Set distance to infinity to all nodes
         self._distance = sys.maxsize
         # Mark all nodes unexplored
@@ -13,9 +16,6 @@ class Vertex:
         self._visited = False
         # Predecessor
         self._previous = None
-
-    def __lt__(self, other):
-        return self.distance < other.distance
 
     def add_neighbor(self, neighbor, weigth = 0):
         self._adjacent[neighbor] = weigth
@@ -33,7 +33,7 @@ class Vertex:
         return self._heuristic.keys()
 
     def get_heuristic(self, target):
-        return self._heuristic[target]
+        return self._heuristic[target] if target in self._heuristic else sys.maxsize
 
     @property
     def adjacent(self):

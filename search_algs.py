@@ -2,31 +2,30 @@
 # encoding: utf-8
 
 '''
-/* *************************************************************************
- * Copyright (C) 2015
- *
- * Cristiano Antonio de Souza - cristianoantonio.souza10@gmail.com
- * Gabriel Custódio Martins - gcmartins93@gmail.com
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- * ************************************************************************* */
+ Copyright (C) 2015
+
+ Cristiano Antonio de Souza - cristianoantonio.souza10@gmail.com
+ Gabriel Custódio Martins - gcmartins93@gmail.com
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License along
+ with this program; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 '''
 
 from file_parser import FileParser
 from settings import Settings
 from dijkstra import Dijkstra
+from a_star import AStar
 from graph import Graph
 import getopt, sys
 
@@ -63,7 +62,8 @@ def main(argv):
     start = graph.get_vertex(content['inicio'][0][0])
     final = graph.get_vertex(content['final'][0][0])
 
-    Dijkstra(graph, start, final).run()
+    #Dijkstra(graph, start, final).run()
+    AStar(graph, start, final)
 
 def build_graph(graph, vertices, edges, heuristics):
     for vertex in vertices:

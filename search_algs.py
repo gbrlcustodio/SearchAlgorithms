@@ -27,6 +27,7 @@ from settings import Settings
 from dijkstra import Dijkstra
 from a_star import AStar
 from graph import Graph
+from menu import Menu
 import getopt, sys
 
 def usage():
@@ -35,7 +36,7 @@ def usage():
           '  -f or --file:\tSpecify file to parse\n  -d:\t\tEnables debugging mode\n')
 
 def main(argv):
-    _file = "entrada.txt"
+    _file = "Entrada.txt"
 
     try:
         opts, args = getopt.getopt(argv, 'hf:d', ['help', 'file='])
@@ -56,24 +57,15 @@ def main(argv):
     content = parser.read_content()
 
     graph = Graph()
-    build_graph(graph, content['vertices'], content['caminho'], content['h'])
-    graph.print_data()
+    graph.build(content['vertices'], content['caminho'], content['h'])
 
-    start = graph.get_vertex(content['inicio'][0][0])
+    start = graph.get_vertex(content['início'][0][0])
     final = graph.get_vertex(content['final'][0][0])
 
-    #Dijkstra(graph, start, final).run()
-    AStar(graph, start, final)
+    dijkstra = Dijkstra(graph, start, final)
+    a_star = AStar(graph, start, final)
 
-def build_graph(graph, vertices, edges, heuristics):
-    for vertex in vertices:
-        graph.add_vertex(vertex)
-
-    for edge in edges:
-        graph.add_edge(edge)
-
-    for heuristic in heuristics:
-        graph.add_heuristic(heuristic)
+    Menu(graph, dijkstra, a_star).run()
 
 if __name__ == '__main__':
     main(sys.argv[1:])

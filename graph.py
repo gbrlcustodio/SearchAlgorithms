@@ -66,6 +66,16 @@ class Graph:
                 hid = h.get_id()
                 print('(%s, %s, heuris = %3d)' % (vid, hid, v.get_heuristic(h)))
 
+    def build(self, vertices, edges, heuristics):
+        for vertex in vertices:
+            self.add_vertex(vertex)
+
+        for edge in edges:
+            self.add_edge(edge)
+
+        for heuristic in heuristics:
+            self.add_heuristic(heuristic)
+
     @property
     def previous(self):
         return self._previous

@@ -1,4 +1,4 @@
-inicio(a).
+início(a).
 final(d).
 caminho(a,b,100).
 caminho(b,c,20).

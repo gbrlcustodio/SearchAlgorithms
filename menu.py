@@ -96,10 +96,12 @@ class Menu:
                     self._graph.print_data()
                 elif menu['options'][getin]['command'] == 'dijkstra':
                     self._dijkstra.run()
+                    print('Iterations: %d' % self._dijkstra.iterations)
                     print('Comparison: %d' % self._dijkstra.comparison)
                     print('Moviments: %d' % self._dijkstra.moviments)
                 elif menu['options'][getin]['command'] == 'a_star':
                     self._a_star.run()
+                    print('Iterations: %d' % self._a_star.iterations)
                     print('Comparison: %d' % self._a_star.comparison)
                     print('Moviments: %d' % self._a_star.moviments)
 

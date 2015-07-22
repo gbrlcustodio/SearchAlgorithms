@@ -6,6 +6,7 @@ class Dijkstra:
         self._f = f
         self._comparison = 0
         self._moviments = 0
+        self._iterations = 0
 
     @property
     def function(self):
@@ -23,9 +24,14 @@ class Dijkstra:
     def moviments(self):
         return self._moviments
 
+    @property
+    def iterations(self):
+        return self._iterations
+
     def run(self):
         self._comparison = 0
         self._moviments = 0
+        self._iterations = 0
 
         # Set all distances to infinite
         for vertex in self._graph:
@@ -45,40 +51,40 @@ class Dijkstra:
 
         while len(unexplored_queue):
             self._comparison += 1
+            self._iterations += 1
             # Pops a vertex with the smallest distance
             current = self._smaller(unexplored_queue)
             current.explored = True
             self._moviments += 2
 
+            if current == self._target:
+                break
+
             for next in current.adjacent:
-                self._comparison += 1
+                self._comparison += 2
 
                 if next.explored:
-                    self._comparison += 1
                     continue
 
                 new_distance = current.distance + current.get_weight(next)
                 self._moviments += 1
 
+                self._comparison += 1
                 if new_distance < next.distance:
-                    self._comparison += 1
                     next.distance = new_distance
                     next.previous = current
                     self._moviments += 2
-                    print('Updated:\n\tcurrent = %s\n\tnext = %s\n\tnew_distance = %s' % (current.get_id(), next.get_id(), next.distance))
+                    #print('Updated:\n\tcurrent = %s\n\tnext = %s\n\tnew_distance = %s' % (current.get_id(), next.get_id(), next.distance))
 
+                self._comparison += 1
                 if not next.visited:
-                    self._comparison += 1
                     next.visited = True
                     unexplored_queue.append(next)
                     self._moviments += 2
 
             self._comparison += 1
         self._comparison += 1
-
-        path = [self._target.get_id()]
-        self.shortest(self._target, path)
-        print('The shortest path : %s' % (path[::-1]))
+        self.shortest()
 
     def _smaller(self, queue):
         smaller = queue[0]
@@ -93,12 +99,22 @@ class Dijkstra:
         self._comparison += 1
 
         queue.remove(smaller)
-        self._moviments += 1
+
+        print('%s: %d' % (smaller.get_id(), self.function(smaller)))
 
         return smaller
 
-    def shortest(self, v, path):
+    def shortest(self):
+        if self._target != self._start and self._target.previous is None:
+            print('There is no path to %s, from %s.' % (self._target, self._start))
+            return
+
+        path = [self._target.get_id()]
+        self._shortest(self._target, path)
+        print('The shortest path : %s' % (path[::-1]))
+
+    def _shortest(self, v, path):
         if v.previous:
             path.append(v.previous.get_id())
-            self.shortest(v.previous, path)
+            self._shortest(v.previous, path)
         return

@@ -62,6 +62,8 @@ def main(argv):
     start = graph.get_vertex(content['início'][0][0])
     final = graph.get_vertex(content['final'][0][0])
 
+    final.add_heuristic(final, 0)
+
     dijkstra = Dijkstra(graph, start, final)
     a_star = AStar(graph, start, final)
 

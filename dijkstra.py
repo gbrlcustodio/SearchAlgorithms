@@ -100,7 +100,7 @@ class Dijkstra:
 
         queue.remove(smaller)
 
-        print('%s: %d' % (smaller.get_id(), self.function(smaller)))
+        #print('%s: %d' % (smaller.get_id(), self.function(smaller)))
 
         return smaller
 

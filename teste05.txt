@@ -1,4 +1,4 @@
-início(Arad).
+início(Pitesti).
 final(Bucharest).
 caminho(Oradea,Zerind,71).
 caminho(Zerind,Oradea,71).

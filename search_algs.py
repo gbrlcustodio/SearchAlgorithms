@@ -36,7 +36,7 @@ def usage():
           '  -f or --file:\tSpecify file to parse\n  -d:\t\tEnables debugging mode\n')
 
 def main(argv):
-    _file = "Entrada.txt"
+    _file = "teste04.txt"
 
     try:
         opts, args = getopt.getopt(argv, 'hf:d', ['help', 'file='])

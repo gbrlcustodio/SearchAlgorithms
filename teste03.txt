@@ -1,4 +1,4 @@
-início(Arad).
+início(Rimnicu Vilcea).
 final(Bucharest).
 caminho(Oradea,Zerind,71).
 caminho(Zerind,Oradea,71).
@@ -24,10 +24,10 @@ caminho(Dobreta,Craiova,120).
 caminho(Craiova,Dobreta,120).
 caminho(Rimnicu Vilcea,Craiova,146).
 caminho(Craiova,Rimnicu Vilcea,146).
-caminho(Rimnicu Vilcea,Pitesti,97).
-caminho(Pitesti,Rimnicu Vilcea,97).
 caminho(Craiova,Pitesti,138).
 caminho(Pitesti,Craiova,138).
+caminho(Rimnicu Vilcea,Pitesti,97).
+caminho(Pitesti,Rimnicu Vilcea,97).
 caminho(Pitesti,Bucharest,101).
 caminho(Bucharest,Pitesti,101).
 caminho(Fagaras,Bucharest,211).
